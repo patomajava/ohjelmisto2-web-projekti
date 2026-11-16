@@ -1,13 +1,3 @@
-with open ("ohjeet.txt", "r", encoding="utf-8") as tiedosto: # DEBUG - LAITA PÄÄLLE LOPULLISESSA VERSIOSSA
-    data = tiedosto.read()
-    print (data)
-input ("Kirjoittakaa jotain, jos olette ymmärtäneet ohjeet: ")
-
-with open ("intro.txt", "r", encoding="utf-8") as tiedosto:
-    data = tiedosto.read()
-    print (data)
-input ("Kirjoittakaa jotain, jos haluatte vihdoin peliin: ")
-
 # INTRO
 # Maailma ilmestyy näkyviin. Se on niin kirkas. Ja teillä on hirvittävä jano. 
 # Heräätte asunnostanne, ja ainoa asia mielessänne on veden löytäminen, keinolla millä hyvänsä.
