@@ -10,18 +10,19 @@ h1 {
 }
 
 .tekstilaatikko {
-    padding: 30px;
-    height: 500px;
+    margin-bottom: 25%;
+}
+
+.valintalaatikko {
+    width: fit-content;
 }
 
 .pelaajan_esineet {
-    padding-right: 0px;
-    padding-left: 200px;
+    text-align:right;
 }
 
 .huoneen_esineet {
-    padding-right: 600px;
-    padding-left: 0px;
+    text-align:left;
 }
 
 .flex-container {
@@ -29,12 +30,14 @@ h1 {
     gap: 15px;
     justify-content: center;
     align-content: center;
+    width:100%;
 }
 
 .grid-container {
     display:grid;
     gap: 15px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width:80%;
 }
 
 .rivi {
