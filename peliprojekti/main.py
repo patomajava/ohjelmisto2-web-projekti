@@ -1,12 +1,18 @@
-with open ("ohjeet.txt", "r", encoding="utf-8") as tiedosto: # DEBUG - LAITA PÄÄLLE LOPULLISESSA VERSIOSSA
-    data = tiedosto.read()
-    print (data)
-input ("Kirjoittakaa jotain, jos olette ymmärtäneet ohjeet: ")
+# INTRO
+# Maailma ilmestyy näkyviin. Se on niin kirkas. Ja teillä on hirvittävä jano. 
+# Heräätte asunnostanne, ja ainoa asia mielessänne on veden löytäminen, keinolla millä hyvänsä.
+# Muistatte, että Suomen presidentillä on huvila naapurissa, korttelin verran idässä. Hänellä on pakko olla vettä!
 
-with open ("intro.txt", "r", encoding="utf-8") as tiedosto:
-    data = tiedosto.read()
-    print (data)
-input ("Kirjoittakaa jotain, jos haluatte vihdoin peliin: ")
+# OHJEET
+# Tämä on text adventure -tyylinen peli. 
+
+# Päävalikossa voitte luoda uuden pelin, ladata tallennustiedoston pelaajahahmon nimen mukaan, tai poistua pelistä.
+
+# Valtaosa toiminnoista suoritetaan näytön alaosassa olevien nappien kautta. Pelistä poistutaan vasemman alakulman kautta.
+# Vasemmalla lukee huoneessa sijaitsevat esineet ja mekanismit. Oikealla lukee lista pelaajan esineistä ja tavaraluettelossa oleva tila.
+# Pelissä käytetään neljää pääilmansuuntaa navigointiin. Jos haluatte esimerkiksi liikkua länteen, valitkaa "Liiku"-toiminto ja painakaa [numero].
+# Pelissä mekanismeiksi luetaan kaikki toiminnalliset asiat, jotka eivät mahdu tavaraluetteloon. Napit, ovet ja muut vastaavat ovat mekanismeja.
+# Muistakaa: Mekanismit eivät välttämättä vaikuta huoneeseen, jossa ne sijaitsevat.
 
 def paavalikko():
     while True:
