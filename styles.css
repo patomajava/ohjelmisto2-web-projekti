@@ -14,6 +14,16 @@ h1 {
     height: 500px;
 }
 
+.pelaajan_esineet {
+    padding-right: 0px;
+    padding-left: 200px;
+}
+
+.huoneen_esineet {
+    padding-right: 600px;
+    padding-left: 0px;
+}
+
 .flex-container {
     display: flex;
     gap: 15px;
@@ -29,6 +39,10 @@ h1 {
 
 .rivi {
     flex-direction: row;
+}
+
+.sarake {
+    flex-direction: column;
 }
 
 .vasen {
