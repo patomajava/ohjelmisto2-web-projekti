@@ -1,0 +1,79 @@
+class Huone():
+    lista_huoneista = []
+    def __init__(self, nimi, pohjoisessa, idassa, etelassa, lannessa, prepositio = "huoneessa, jonka nimi on {nimi}", kuvaus = "", pohjoinen_estetty = False, ita_estetty = False, etela_estetty = False, lansi_estetty = False):
+        self.nimi = nimi
+        self.pohjoisessa = pohjoisessa
+        self.idassa = idassa
+        self.etelassa = etelassa
+        self.lannessa = lannessa
+        self.prepositio = prepositio # Olet {prepositio}ssa.
+        self.kuvaus = kuvaus
+        self.pohjoinen_estetty = pohjoinen_estetty
+        self.ita_estetty = ita_estetty
+        self.etela_estetty = etela_estetty
+        self.lansi_estetty = lansi_estetty
+        self.esineet = []
+        self.mekanismit = []
+        self.id = len(Huone.lista_huoneista) # Käytetään tallentamiseen ja lataamiseen.
+        Huone.lista_huoneista.append(self)
+
+    def korjaa_huoneet(self): # Estetään huoneita rikkomasta fysiikan lakeja ja mahdollistetaan kaksisuuntaiset yhteydet, mutta ei pakoteta niitä.
+        if self.pohjoisessa == "auto":
+            for huone in Huone.lista_huoneista:
+                if huone.etelassa == self:
+                    self.pohjoisessa = huone
+                    break # Ei tarkisteta muita huoneita tämän ilmansuunnan suhteen, jos täsmää
+                else:
+                    self.pohjoisessa = Tyhja()
+
+        if self.idassa == "auto":
+            for huone in Huone.lista_huoneista:
+                if huone.lannessa == self:
+                    self.idassa = huone
+                    break # Ei tarkisteta muita huoneita tämän ilmansuunnan suhteen, jos täsmää
+                else:
+                    self.idassa = Tyhja()
+
+        if self.etelassa == "auto":
+            for huone in Huone.lista_huoneista:
+                if huone.pohjoisessa == self:
+                    self.etelassa = huone
+                    break # Ei tarkisteta muita huoneita tämän ilmansuunnan suhteen, jos täsmää
+                else:
+                    self.etelassa = Tyhja()
+
+        if self.lannessa == "auto":
+            for huone in Huone.lista_huoneista:
+                if huone.idassa == self:
+                    self.lannessa = huone
+                    break # Ei tarkisteta muita huoneita tämän ilmansuunnan suhteen, jos täsmää
+                else:
+                    self.lannessa = Tyhja()
+
+
+    def lisaa_esine(self, esine):
+        self.esineet.append(esine)
+        return
+
+    def lisaa_mekanismi(self, mekanismi):
+        self.mekanismit.append(mekanismi)
+        return
+
+    def luettele_esineet(self):
+        for esine in self.esineet:
+            print (esine.nimi)
+
+    def serialisoi_esineet(self): # Tallennetaan esineiden ID:t.
+        self.esineet_serialisoitu = []
+        for esine in self.esineet:
+            self.esineet_serialisoitu.append(esine.id)
+        return self.esineet_serialisoitu
+
+    def serialisoi_esteet(self): # Tallennetaan, minne voi ja ei voi mennä.
+        self.esteet_serialisoitu = [self.pohjoinen_estetty, self.ita_estetty, self.etela_estetty, self.lansi_estetty]
+        return self.esteet_serialisoitu
+
+class Tyhja(Huone): # Jos jossakin suunnassa ei ole mitää, siellä on tämä "huone".
+    def __init__(self, nimi = "ei mitään", prepositio = "ei missään. Teidän ei kuuluisi olla täällä."):
+        self.nimi = nimi
+        self.prepositio = prepositio
