@@ -1,36 +1,240 @@
-body {
-    background-color: white;
-    color: black;
-    font-family: Google Sans;
+/* Värit ja fontit */
+:root {
+    --tausta: #f5f5f5;
+    --paneeli: #ffffff;
+    --paneeli-vaalea: #eeeeee;
+    --reuna: #d5d5d5;
+    --teksti: #222222;
+    --himmea: #666666;
+    --korostus: #444444;
+    --paa: #555555;
+    --vaara: #777777;
+    --fontti: "Google Sans", Arial, sans-serif;
 }
 
-h1 {
-    font-size: 40px;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--tausta);
+    color: var(--teksti);
+    font-family: var(--fontti);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    margin: 0 0 14px 0;
+}
+
+p {
+    margin: 0 0 20px 0;
+}
+
+/* Väliaikainen navigointi (poistetaan myöhemmin) */
+.valiaikainen-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    padding: 8px 24px;
+    background-color: #eeeeee;
+    border-bottom: 1px dashed var(--reuna);
+    font-size: 14px;
+}
+
+.valiaikainen-nav a {
+    color: var(--korostus);
+}
+
+/* Sivu ja paneelit */
+.sivu {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 24px 48px 24px;
+}
+
+.sivun-otsikko {
+    margin-bottom: 28px;
+    padding: 28px 24px;
+    background-color: var(--paneeli);
+    border: 1px solid var(--reuna);
+    border-bottom: 4px solid var(--korostus);
+    border-radius: 10px;
+    font-size: 48px;
     text-align: center;
 }
 
-.tekstilaatikko {
-    padding: 30px;
-    height: 500px;
+.paneeli, .tekstilaatikko, .sivupaneeli, .peli-ylapalkki {
+    background-color: var(--paneeli);
+    border: 1px solid var(--reuna);
+    border-radius: 10px;
 }
 
-.flex-container {
+.paneeli {
+    margin-bottom: 28px;
+    padding: 28px 32px;
+}
+
+.paneeli h2, .tekstilaatikko h2 {
+    color: var(--korostus);
+}
+
+.tarinateksti, .tekstilaatikko p {
+    max-width: 70ch;
+    font-family: var(--fontti-tarina);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.nappirivi {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
     justify-content: center;
-    align-content: center;
+    gap: 16px;
+}
+
+.nappi, .grid-item {
+    background-color: var(--paneeli-vaalea);
+    color: var(--teksti);
+    border: 1px solid var(--reuna);
+    border-radius: 10px;
+    font-family: var(--fontti);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nappi:hover, .grid-item:hover {
+    border-color: var(--korostus);
+}
+
+.nappi {
+    min-width: 180px;
+    padding: 14px 28px;
+    font-size: 18px;
+}
+
+.nappi-paa {
+    background-color: var(--paa);
+    border-color: var(--paa);
+    color: white;
+}
+
+.nappi-poistu {
+    min-width: 0;
+    padding: 10px 22px;
+    background-color: transparent;
+    border-color: var(--vaara);
+    color: var(--vaara);
+}
+
+.ohjeet {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+/* pelaajan_tiedot.html */
+.lomake-sivu {
+    max-width: 560px;
+}
+
+.lomake {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.kentta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--himmea);
+}
+
+.kentta input {
+    padding: 12px 14px;
+    background-color: var(--tausta);
+    color: var(--teksti);
+    border: 1px solid var(--reuna);
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+/* peli.html) */
+.peli-sivu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1200px;
+}
+
+.peli-ylapalkki {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
+
+.tekstilaatikko {
+    min-height: 260px;
+    padding: 28px 32px;
+}
+
+.peli-alue {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 16px;
+}
+
+.sivupaneeli {
+    padding: 16px 20px;
+    color: var(--himmea);
+    font-size: 15px;
+}
+
+.sivupaneeli h3 {
+    color: var(--korostus);
+    font-family: var(--fontti);
+    font-size: 17px;
+}
+
+.sivupaneeli ul {
+    margin: 0;
+    padding-left: 20px;
 }
 
 .grid-container {
-    display:grid;
-    gap: 15px;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
 }
 
-.rivi {
-    flex-direction: row;
+.grid-item {
+    min-height: 64px;
+    font-size: 24px;
 }
 
-.vasen {
-    justify-content:left;
+/* Pienet näytöt */
+@media (max-width: 700px) {
+
+    .sivu {
+        padding: 20px 14px 36px 14px;
+    }
+
+    .sivun-otsikko {
+        font-size: 30px;
+    }
+
+    .peli-alue {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-container {
+        order: -1;
+        gap: 8px;
+    }
+
+    .nappi {
+        width: 100%;
+    }
 }

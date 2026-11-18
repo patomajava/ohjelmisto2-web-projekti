@@ -5,20 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelaajan tiedot</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <h1>Pelaajan tiedot</h1>
-    
-    <div id="form">
 
-    <form action="#">
-        <input id="nimi" name="pelaajan_nimi" type="text" placeholder="Pelaajan nimi"/>
-        <br>
-        <input id="ika" name="pelaajan_ika" type="text" placeholder="Pelaajan ikä"/>
-        <br>
-        <input id="hyvaksy" value="hyväksy" type="submit"/>
-    </form>
+    <!-- VÄLIAIKAINEN NAVIGOINTI: poistetaan myöhemmin -->
+    <nav class="valiaikainen-nav">
+        <span>Väliaikainen navigointi:</span>
+        <a href="index.html">Etusivu</a>
+        <a href="pelaajan_tiedot.html">Pelaajan tiedot</a>
+        <a href="peli.html">Peli</a>
+        <a href="tulokset.html">Tulokset</a>
+    </nav>
 
-    </div>
+    <main class="sivu lomake-sivu">
+
+        <h1 class="sivun-otsikko">Pelaajan tiedot</h1>
+
+        <section class="paneeli" id="form">
+
+            <form action="#" class="lomake">
+
+                <div class="kentta">
+                    <label for="nimi">Pelaajan nimi</label>
+                    <input id="nimi" name="pelaajan_nimi" type="text" placeholder="Kirjoita nimi">
+                </div>
+
+                <div class="kentta">
+                    <label for="ika">Pelaajan ikä</label>
+                    <input id="ika" name="pelaajan_ika" type="text" placeholder="Kirjoita ikä">
+                </div>
+
+                <input class="nappi nappi-paa" value="Aloita" type="submit">
+
+            </form>
+            
+        </section>
+    </main>
 </body>
 </html>

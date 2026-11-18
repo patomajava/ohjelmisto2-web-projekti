@@ -5,31 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etusivu</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <h1>Pelin otsikko</h1>
 
-    <p>
-INTRO
-Maailma ilmestyy näkyviin. Se on niin kirkas. Ja teillä on hirvittävä jano. 
-Heräätte asunnostanne, ja ainoa asia mielessänne on veden löytäminen, keinolla millä hyvänsä.
-Muistatte, että Suomen presidentillä on huvila naapurissa, korttelin verran idässä. Hänellä on pakko olla vettä!
+    <!-- VÄLIAIKAINEN NAVIGOINTI: poistetaan myöhemmin -->
+    <nav class="valiaikainen-nav">
+        <span>Väliaikainen navigointi:</span>
+        <a href="index.html">Etusivu</a>
+        <a href="pelaajan_tiedot.html">Pelaajan tiedot</a>
+        <a href="peli.html">Peli</a>
+        <a href="tulokset.html">Tulokset</a>
+    </nav>
 
-OHJEET
-Tämä on text adventure -tyylinen peli. 
+    <main class="sivu">
 
-Päävalikossa voitte luoda uuden pelin, ladata tallennustiedoston pelaajahahmon nimen mukaan, tai poistua pelistä.
+        <h1 class="sivun-otsikko">Pelin otsikko</h1>
 
-Valtaosa toiminnoista suoritetaan näytön alaosassa olevien nappien kautta. Pelistä poistutaan vasemman alakulman kautta.
-Vasemmalla lukee huoneessa sijaitsevat esineet ja mekanismit. Oikealla lukee lista pelaajan esineistä ja tavaraluettelossa oleva tila.
-Pelissä käytetään neljää pääilmansuuntaa navigointiin. Jos haluatte esimerkiksi liikkua länteen, valitkaa "Liiku"-toiminto ja painakaa [numero].
-Pelissä mekanismeiksi luetaan kaikki toiminnalliset asiat, jotka eivät mahdu tavaraluetteloon. Napit, ovet ja muut vastaavat ovat mekanismeja.
-Muistakaa: Mekanismit eivät välttämättä vaikuta huoneeseen, jossa ne sijaitsevat.
-    </p>
+        <section class="paneeli ohjeet">
 
-    <div class="flex-container rivi">
-        <button class="card">UUSI PELI</button>
-        <button class="card">LATAA PELI</button>
-    </div>
+            <h2>Intro</h2>
+            <div class="tarinateksti">
+                <p>
+                    Maailma ilmestyy näkyviin. Se on niin kirkas. Ja teillä on hirvittävä jano.
+                    Heräätte asunnostanne, ja ainoa asia mielessänne on veden löytäminen,
+                    keinolla millä hyvänsä.
+                </p>
+                <p>
+                    Muistatte, että Suomen presidentillä on huvila naapurissa,
+                    korttelin verran idässä. Hänellä on pakko olla vettä!
+                </p>
+            </div>
+
+            <h2>Ohjeet</h2>
+            <p>Tämä on text adventure -tyylinen peli.</p>
+            <p>
+                Päävalikossa voitte luoda uuden pelin, ladata tallennustiedoston
+                pelaajahahmon nimen mukaan, tai poistua pelistä.
+            </p>
+            <p>
+                Valtaosa toiminnoista suoritetaan näytön alaosassa olevien nappien kautta.
+                Pelistä poistutaan vasemman alakulman kautta.
+            </p>
+            <p>
+                Vasemmalla lukee huoneessa sijaitsevat esineet ja mekanismit.
+                Oikealla lukee lista pelaajan esineistä ja tavaraluettelossa oleva tila.
+            </p>
+            <p>
+                Pelissä käytetään neljää pääilmansuuntaa navigointiin.
+                Jos haluatte esimerkiksi liikkua länteen, valitkaa "Liiku"-toiminto
+                ja painakaa [numero].
+            </p>
+            <p>
+                Pelissä mekanismeiksi luetaan kaikki toiminnalliset asiat,
+                jotka eivät mahdu tavaraluetteloon. Napit, ovet ja muut vastaavat
+                ovat mekanismeja.
+            </p>
+            <p>
+                Muistakaa: Mekanismit eivät välttämättä vaikuta huoneeseen,
+                jossa ne sijaitsevat.
+            </p>
+
+        </section>
+
+        <div class="nappirivi">
+            <button class="nappi nappi-paa">Uusi peli</button>
+            <button class="nappi">Lataa peli</button>
+        </div>
+        
+    </main>
 </body>
 </html>

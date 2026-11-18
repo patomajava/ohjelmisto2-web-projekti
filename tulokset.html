@@ -1,24 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tulokset</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
 
-<h1>Tulokset</h1>
+    <!-- VÄLIAIKAINEN NAVIGOINTI: poistetaan myöhemmin -->
+    <nav class="valiaikainen-nav">
+        <span>Väliaikainen navigointi:</span>
+        <a href="index.html">Etusivu</a>
+        <a href="pelaajan_tiedot.html">Pelaajan tiedot</a>
+        <a href="peli.html">Peli</a>
+        <a href="tulokset.html">Tulokset</a>
+    </nav>
 
-<p>VOITITTE PELIN!</p>
+    <main class="sivu">
 
-<p>Olette saaneet vettä janoonne. Juodessanne graalista mietitte, onko avaruutta enää edes olemassa.</p>
+        <h1 class="sivun-otsikko">Voititte pelin!</h1>
 
-<div class="flex-container rivi">
-    <button class="card">PÄÄVALIKKO</button>
-    <button class="card">UUSI PELI</button>
-    <button class="card">LATAA PELI</button>
-</div>
+        <section class="paneeli">
+            <div class="tarinateksti">
+                <p>
+                    Olette saaneet vettä janoonne. Juodessanne graalista
+                    mietitte, onko avaruutta enää edes olemassa.
+                </p>
+            </div>
+        </section>
 
+        <div class="nappirivi">
+            <button class="nappi">Palaa päävalikkoon</button>
+            <button class="nappi nappi-paa">Uusi peli</button>
+            <button class="nappi">Lataa peli</button>
+        </div>
+        
+    </main>
 </body>
 </html>
