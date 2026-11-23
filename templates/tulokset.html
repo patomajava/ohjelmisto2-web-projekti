@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tulokset</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <script src="{{url_for('static', filename='js/scripts.js')}}" defer></script>
 </head>
 <body>
 
     <!-- VÄLIAIKAINEN NAVIGOINTI: poistetaan myöhemmin -->
     <nav class="valiaikainen-nav">
         <span>Väliaikainen navigointi:</span>
-        <a href="index.html">Etusivu</a>
-        <a href="pelaajan_tiedot.html">Pelaajan tiedot</a>
-        <a href="peli.html">Peli</a>
-        <a href="tulokset.html">Tulokset</a>
+        <a href="{{url_for('index')}}">Etusivu</a>
+        <a href="{{url_for('peli_uusi')}}">Uusi peli</a>
+        <a href="{{url_for('peli_lataa')}}">Lataa peli</a>
+        <a href="{{url_for('peli')}}">Peli</a>
+        <a href="{{url_for('tulokset')}}">Tulokset</a>
     </nav>
 
     <main class="sivu">
@@ -32,9 +33,9 @@
         </section>
 
         <div class="nappirivi">
-            <button class="nappi">Palaa päävalikkoon</button>
-            <button class="nappi nappi-paa">Uusi peli</button>
-            <button class="nappi">Lataa peli</button>
+            <button id="poistu" class="nappi">Palaa päävalikkoon</button>
+            <button id="uusi-peli" class="nappi nappi-paa">Uusi peli</button>
+            <button id="lataa-peli" class="nappi">Lataa peli</button>
         </div>
         
     </main>

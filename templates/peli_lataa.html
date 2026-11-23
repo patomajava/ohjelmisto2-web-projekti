@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lataa peli</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
+</head>
+<body>
+
+    <!-- VÄLIAIKAINEN NAVIGOINTI: poistetaan myöhemmin -->
+    <nav class="valiaikainen-nav">
+        <span>Väliaikainen navigointi:</span>
+        <a href="{{url_for('index')}}">Etusivu</a>
+        <a href="{{url_for('peli_uusi')}}">Uusi peli</a>
+        <a href="{{url_for('peli_lataa')}}">Lataa peli</a>
+        <a href="{{url_for('peli')}}">Peli</a>
+        <a href="{{url_for('tulokset')}}">Tulokset</a>
+    </nav>
+
+    <main class="sivu lomake-sivu">
+        <h1 class="sivun-otsikko">Lataa peli</h1>
+
+        <section class="paneeli">
+            <h2>Valitse tallennus</h2>
+            <p class="lomake-kuvaus">Valitse tallennettu peli jatkaaksesi siitä, mihin jäit.</p>
+
+            <form action="#" class="lomake" method="POST">
+                <div class="kentta">
+                    <select id="tallennus" name="tallennus" required>
+                        <option value="" selected disabled>Valitse tallennus</option>
+                    </select>
+                </div>
+
+                <input class="nappi nappi-paa" type="submit" value="Lataa peli">
+            </form>
+        </section>
+    </main>
+</body>
+</html>

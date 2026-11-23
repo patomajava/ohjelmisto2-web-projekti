@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelaajan tiedot</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <script src="{{url_for('static', filename='js/scripts.js')}}" defer></script>
 </head>
 <body>
 
     <!-- VÄLIAIKAINEN NAVIGOINTI: poistetaan myöhemmin -->
     <nav class="valiaikainen-nav">
         <span>Väliaikainen navigointi:</span>
-        <a href="index.html">Etusivu</a>
-        <a href="pelaajan_tiedot.html">Pelaajan tiedot</a>
-        <a href="peli.html">Peli</a>
-        <a href="tulokset.html">Tulokset</a>
+        <a href="{{url_for('index')}}">Etusivu</a>
+        <a href="{{url_for('peli_uusi')}}">Uusi peli</a>
+        <a href="{{url_for('peli_lataa')}}">Lataa peli</a>
+        <a href="{{url_for('peli')}}">Peli</a>
+        <a href="{{url_for('tulokset')}}">Tulokset</a>
     </nav>
 
     <main class="sivu lomake-sivu">
@@ -24,7 +25,7 @@
 
         <section class="paneeli" id="form">
 
-            <form action="#" class="lomake">
+            <form action="#" class="lomake" method="POST">
 
                 <div class="kentta">
                     <label for="nimi">Pelaajan nimi</label>
@@ -36,7 +37,7 @@
                     <input id="ika" name="pelaajan_ika" type="text" placeholder="Kirjoita ikä">
                 </div>
 
-                <input class="nappi nappi-paa" value="Aloita" type="submit">
+                <input id="aloita" class="nappi nappi-paa" value="Aloita" type="submit">
 
             </form>
             
