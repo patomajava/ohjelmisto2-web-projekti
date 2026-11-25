@@ -11,12 +11,16 @@ nappi_uusi?.addEventListener("click", () => {window.location.href = "/peli_uusi"
 nappi_lataa?.addEventListener("click", () => {window.location.href = "/peli_lataa"});
 nappi_poistu?.addEventListener("click", () => {window.location.href = "/"});
 
-valintanapit?.forEach(nappi => {nappi.addEventListener("click", paivitaPeli)});
+valintanapit?.forEach(nappi => {
+    nappi.addEventListener("click", (event) => {
+        paivitaPeli(event.currentTarget.dataset.valinta);
+    });
+});
 
-async function paivitaPeli() {
+async function paivitaPeli(valinta) {
 
     try {
-        const response = await fetch("http://127.0.0.1:3000/pelin_tilanne");
+        const response = await fetch(`http://127.0.0.1:3000/pelin_tilanne?valinta=${valinta}`);
         if (!response.ok) {
             throw new Error("HTTP-virhe. Koodi: " + response.status);
         }
