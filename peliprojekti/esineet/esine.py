@@ -9,7 +9,8 @@ class Esine():
         Esine.lista_esineista.append(self)
 
     def kayta_esine(self):
-        print (self.toimintokuvaus)
+        tarinateksti = (self.toimintokuvaus)
+        return tarinateksti
         # Jos peli olisi suurempi, tekisin tänne jotain presettejä.
 
 
@@ -21,4 +22,5 @@ class Luettava(Esine):
         self.printtaaja = printtaaja
 
     def kayta_esine(self):
-        print (self.teksti)
+        tarinateksti = (self.teksti)
+        return tarinateksti

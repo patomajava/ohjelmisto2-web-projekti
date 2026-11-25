@@ -60,8 +60,20 @@ class Huone():
         return
 
     def luettele_esineet(self):
+        numero = 0
+        tarinateksti = "\nHuoneessa on seuraavat esineet:"
         for esine in self.esineet:
-            print (esine.nimi)
+            numero += 1
+            tarinateksti = tarinateksti + (f"\n{numero}: ") + (esine.nimi)
+        return tarinateksti
+
+    def luettele_mekanismit(self):
+        numero = 0
+        tarinateksti = "\nHuoneessa on seuraavat mekanismit:"
+        for mekanismi in self.mekanismit:
+            numero += 1
+            tarinateksti = tarinateksti + (f"\n{numero}: ") + (mekanismi.nimi)
+        return tarinateksti
 
     def serialisoi_esineet(self): # Tallennetaan esineiden ID:t.
         self.esineet_serialisoitu = []
