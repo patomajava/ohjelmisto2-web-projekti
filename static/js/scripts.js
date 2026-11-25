@@ -39,7 +39,7 @@ function tarinatekstit(data) {
 
     const tekstilaatikko = document.getElementById("tarinateksti");
     tekstilaatikko.innerHTML = "";
-        
+
     tekstilaatikko.textContent = data.tarinateksti;
 
 }
