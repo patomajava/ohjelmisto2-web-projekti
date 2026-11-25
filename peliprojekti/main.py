@@ -1,8 +1,8 @@
-# import json
-# from esineet import Esine, Luettava
-# from huoneet import Huone, Tyhja
-# from mekanismit import Mekanismi, Este, Kaivinkone
-# from pelaaja import Pelaaja
+import json
+from esineet import Esine, Luettava
+from huoneet import Huone, Tyhja
+from mekanismit import Mekanismi, Este, Kaivinkone
+from pelaaja import Pelaaja
 
 from flask import Flask, request # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
 
@@ -102,6 +102,7 @@ def uusi_peli(pelaajan_nimi, pelaajan_ika):
     huone_u_1.lisaa_esine(lore_dump)
     huone_6_4.lisaa_esine(tikkaat)
     maali.lisaa_esine(malja)
+    global pelaaja
     pelaaja.nimi = pelaajan_nimi
     pelaaja.ika = pelaajan_ika
 
