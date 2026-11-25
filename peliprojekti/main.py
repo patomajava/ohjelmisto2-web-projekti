@@ -1,12 +1,12 @@
-import json
-from esineet import Esine, Luettava
-from huoneet import Huone, Tyhja
-from mekanismit import Mekanismi, Este, Kaivinkone
-from pelaaja import Pelaaja
+# import json
+# from esineet import Esine, Luettava
+# from huoneet import Huone, Tyhja
+# from mekanismit import Mekanismi, Este, Kaivinkone
+# from pelaaja import Pelaaja
 
-from flask import Flask, request
+from flask import Flask, request # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
 
-app = Flask(__name__)
+app = Flask(__name__) # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
 
 # def paavalikko():
 #     while True:
@@ -37,8 +37,8 @@ app = Flask(__name__)
 #     print ("\nOlette alaikäinen. Ette voi pelata.")
 #     quit
 
-# pelaajan_nimi = ("Testeri") # DEBUG - LAITA POIS LOPULLISESSA VERSIOSSA
-# pelaajan_ika = 20 # DEBUG - LAITA POIS LOPULLISESSA VERSIOSSA
+# # pelaajan_nimi = ("Testeri") # DEBUG - LAITA POIS LOPULLISESSA VERSIOSSA
+# # pelaajan_ika = 20 # DEBUG - LAITA POIS LOPULLISESSA VERSIOSSA
 
 
 # -- Huoneet --
@@ -107,37 +107,37 @@ def uusi_peli(pelaajan_nimi, pelaajan_ika):
 
     return pelin_data(pelaaja)
 
-# -- PELIN LATAAMINEN --
+# # -- PELIN LATAAMINEN --
 
-def lataa_peli(tallennus):
-    with open ("tallennus", "r") as tallennus:
-        data_luettu = json.load(tallennus)
+# def lataa_peli(tallennus):
+#     with open ("tallennus", "r") as tallennus:
+#         data_luettu = json.load(tallennus)
 
-    pelaajan_nimi = data_luettu["pelaajan nimi"]
-    pelaajan_ika = data_luettu["pelaajan ikä"]
-    pelaajan_esineet = data_luettu["pelaajan esineet"]
+#     pelaajan_nimi = data_luettu["pelaajan nimi"]
+#     pelaajan_ika = data_luettu["pelaajan ikä"]
+#     pelaajan_esineet = data_luettu["pelaajan esineet"]
 
-    pelaajan_sijainti = data_luettu["pelaajan sijainti"]
-    for huone in Huone.lista_huoneista:
-        if huone.id == pelaajan_sijainti:
-            pelaajan_sijainti = huone
+#     pelaajan_sijainti = data_luettu["pelaajan sijainti"]
+#     for huone in Huone.lista_huoneista:
+#         if huone.id == pelaajan_sijainti:
+#             pelaajan_sijainti = huone
 
     pelaaja = Pelaaja(pelaajan_nimi, pelaajan_sijainti, pelaajan_ika)
 
-    for esine_id in pelaajan_esineet:
-        for esine in Esine.lista_esineista:
-            if esine.id == esine_id:
-                pelaaja.lisaa_esine(esine)
+#     for esine_id in pelaajan_esineet:
+#         for esine in Esine.lista_esineista:
+#             if esine.id == esine_id:
+#                 pelaaja.lisaa_esine(esine)
 
-    for huone in Huone.lista_huoneista:
-        for esine_id in data_luettu[str(huone.id) + "esineet"]:
-            for esine in Esine.lista_esineista:
-                if esine.id == esine_id:
-                    huone.lisaa_esine(esine)
+#     for huone in Huone.lista_huoneista:
+#         for esine_id in data_luettu[str(huone.id) + "esineet"]:
+#             for esine in Esine.lista_esineista:
+#                 if esine.id == esine_id:
+#                     huone.lisaa_esine(esine)
         
-    # -- Ladataan esteet --
+#     # -- Ladataan esteet --
 
-    huone.pohjoinen_estetty, huone.ita_estetty, huone.etela_estetty, huone.lansi_estetty = data_luettu[str(huone.id) + "esteet"]
+#     huone.pohjoinen_estetty, huone.ita_estetty, huone.etela_estetty, huone.lansi_estetty = data_luettu[str(huone.id) + "esteet"]
 
 # -- PELAAJAN OHJAAMINEN -- 
 @app.route("/pelaajan_vuoro/<numerovalinta>")
@@ -225,7 +225,7 @@ def pelaajan_vuoro(numerovalinta):
     return pelin_data(pelaaja)
 # --------------------------
 
-# -- Tallentaminen --
+# # -- Tallentaminen --
 
 def pelin_data(pelaaja):
     tallennus_data = {
@@ -246,5 +246,5 @@ def tallenna_peli(pelaaja):
     with open (f"{pelaaja.nimi}.json", "w") as tallennus:
         json.dump(pelin_data(pelaaja), tallennus)
 
-if __name__ == '__main__':
+if __name__ == '__main__': # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
     app.run(host='127.0.0.1', port=3000, use_reloader=True)
