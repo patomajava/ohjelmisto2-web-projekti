@@ -1,11 +1,12 @@
 class Pelaaja():
-    def __init__(self, nimi, sijainti):
+    def __init__(self, nimi, sijainti, ika):
         self.nimi = nimi
         self.esineet = []
         self.sijainti = sijainti
+        self.ika = ika
         self.tilavuusraja = 10
         self.tilavuus = 0
-        self.nykyinen_valikko = "päävalikko"
+        self.nykyinen_valikko = "pelaajavalikko"
 
     def liiku(self, suunta):
         self.suunta = suunta
