@@ -5,6 +5,7 @@ class Pelaaja():
         self.sijainti = sijainti
         self.tilavuusraja = 10
         self.tilavuus = 0
+        self.nykyinen_valikko = "päävalikko"
 
     def liiku(self, suunta):
         self.suunta = suunta

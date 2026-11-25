@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 
+from peliprojekti import main
+
 app = Flask(__name__)
 
 @app.route("/")
