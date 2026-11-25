@@ -1,3 +1,6 @@
 *.json
 */__pycache__
-/maailma.py
+__pycache__/
+*.py[cod]
+.DS_Store
+/testing.py
