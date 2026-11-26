@@ -84,7 +84,7 @@ class Kaivinkone(Este):
             self.seina_hp = 2
             self.kasijarru = False
             self.kytkin = False
-            tarinateksti = ("Edessänne on viisi kahvaa, kolme poljinta ja kaksi nappia. Missään ei ole ohjeita. Avain on jo koneessa, mutta kone ei ole käynnissä.\nMitä haluatte tehdä?\n1: Kahva vasemmalla\n2: Kahva edessänne\n3: Kahva etuoikealla\n4: Kahva keskioikealla\n5: Kahva oikealla\n6: Poljin vasemmalla\n7: Poljin keskellä\n8: Poljin oikealla\n9: Avaimet\n10: Nappi vieressänne\n0: POIS TÄÄLTÄ")
+            tarinateksti = ("Edessänne on viisi kahvaa, kolme poljinta ja kaksi nappia. Missään ei ole ohjeita. Avain on jo koneessa, mutta kone ei ole käynnissä.")
             return tarinateksti
     def toiminto(self, pelaaja, numerovalinta):
         if numerovalinta == 1:

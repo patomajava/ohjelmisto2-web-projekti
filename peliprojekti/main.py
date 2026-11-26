@@ -44,18 +44,18 @@ app = Flask(__name__) # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
 # -- Huoneet --
 
 huone_2_2 = Huone("Asunto", "auto", "auto", "auto", "auto", "asunnossanne", "Niin paljon huonekaluja, perheen muistoesineitä ja kodinkoneita... Mitään niistä ei voi juoda. Jatkakaa.")
-huone_2_3 = Huone("Käytävä", "auto", "auto", huone_2_2, "auto", "asuntorakennuksen käytävässä", "Hmm. Ramin etuovi pohjoisessa on auki...")
+huone_2_3 = Huone("Käytävä", "auto", "auto", huone_2_2, "auto", "asuntorakennuksen käytävässä", "Todella ränsistynyttä! Hmm. Ramin etuovi pohjoisessa on auki..?")
 huone_2_4 = Huone("Ramin asunto", "auto", "auto", huone_2_3, "auto", "ramin asunnossa", "Asunto on tyhjä? Hän aina valitti köyhyyttään, mutta tämä tuli yllätyksenä. Hetkinen, lattialla on lappu...")
 huone_3_3 = Huone("Eteinen", "auto", "auto", "auto", huone_2_3, "eteisessä", "Näissä etuoven asunnoissa kuulee varmaan jokaisen sisääntulijan. Siis kuuli.", False, True, False, False)
-huone_3_4 = Huone("Irenen asunto", "auto", "auto", huone_3_3, "auto", "Irenen asunnossa", "Irene oli yksi ensimmäisistä, jotka lähtivät täältä. Itse ette pitäneet sitä hyökyaaltoa juuri minään. Ettekä vieläkään pidä.")
+huone_3_4 = Huone("Irenen asunto", "auto", "auto", huone_3_3, "auto", "Irenen asunnossa", "Irene oli yksi ensimmäisistä, jotka lähtivät täältä. Itse ette pitänyt sitä hyökyaaltoa juuri minään. Ettekä vieläkään pidä.")
 
 huone_4_3 = Huone("Katu", "auto", "auto", "auto", huone_3_3, "jalkakäytävällä", "Olittekin unohtanut, kuinka paksua ilma oli... Olisi pitänyt ainakin *harkita* sitä hybridiautoa.")
 huone_5_3 = Huone("Presidentin huvila, ulko-ovi", "auto", "auto", "auto", huone_4_3, "presidentin huvilan ulko-ovella", "Nyt vain etsitään keino sisään.")
-huone_5_4 = Huone("Presidentin huvila, pergola", "auto", "auto", huone_5_3, "auto", "presidentin huvilan pergolassa")
-huone_6_4 = Huone("Presidentin huvila, heikko seinä", "auto", "auto", "auto", huone_5_4, "presidentin huvilan heikon seinän luona", "Katsos, kaivinkone. Juuri sopivasti!", False, False, True)
+huone_5_4 = Huone("Presidentin huvila, pergola", "auto", "auto", huone_5_3, "auto", "presidentin huvilan pergolassa", "Mietitte, minne presidentti mahtoi mennä. Naapurinne ainakin pakenivat Pirkanmaan väestönsuojiin.")
+huone_6_4 = Huone("Presidentin huvila, heikko seinä", "auto", "auto", "auto", huone_5_4, "presidentin huvilan heikon seinän luona", "Katsos, kaivinkone. Romutetaanpa tuo seinä!", False, False, True)
 
 huone_5_2 = Huone("Presidentin huvila, puutarha", huone_5_3, "auto", "auto", "auto", "presidentin huvilan puutarhassa", "Ei ole kukkia. On vain levää... Jos mikään enää tuoksuisi, ette tiedä, tuoksuisiko tämä miljöö miltään.")
-huone_6_2 = Huone("Presidentin huvila, takapiha", "auto", "auto", "auto", huone_5_2, "presidentin huvilan takapihalla", "Tuolla ylhäällä on ikkuna. Jotenkin pitäisi kiivetä ylös.", True)
+huone_6_2 = Huone("Presidentin huvila, takapiha", "auto", "auto", "auto", huone_5_2, "presidentin huvilan takapihalla", "Tuolla ylhäällä on ikkuna. Jotenkin pitäisi kiivetä sinne.", True)
 
 huone_u_1 = Huone("Tunnelin alku", Tyhja(), "auto", "auto", "auto", "tunnelin alussa", "Ette pääse enää takaisin. On pimeää. Seuratkaa ilmavirtaa.")
 huone_u_0 = Huone("ei mitään?", "auto", huone_5_2, huone_u_1, "auto", "maakuopan ympärillä", "Tuolla on jotain... Hypätkää alas. Ilma ottaa kopin.")
@@ -70,12 +70,11 @@ for huone in Huone.lista_huoneista:
 
 # -- Esineet --
 
-kartta = Luettava("Kartta", 0.1, (f"Kartassa lukee: 'Kartta on keskeneräinen. ASCII kartta tulossa, ehkä.'"))
-rami_lappu_1 = Luettava("Ramin lappu", 0.1, (f"Lapussa lukee: 'pelaajan_nimi, minun lähdettyäni olet ainoa sielu koko kylässä.\nEn ole dorka; tiedän, että huomasit, kuinka varastin pressan huvilasta juomavettä kaikki nämä vuodet. Aion jättää tämän tiedon sinulle, hyvä ystäväni. Eksäni talossa on lisää tietoa. Ainoa nainen koko rakennuksessa.'"))
-rami_lappu_2 = Luettava("Ramin lappu 2", 0.1, (f"Lapussa lukee: 'pelaajan_nimi, pressan huvilaan on kolme reittiä. Ikkuna, seinästä läpi tai piilotettu, maanalainen tunneli. Ikkuna on rakennuksen eteläisessä seinässä, heikko muuraus pohjoisessa ja tunneli on kadun lähellä piilossa.'"))
-irene_kirja = Luettava("Sensaatiolehti", 0.6, "Selaatte lehteä: 'VESI TAPPAA MEIDÄT KAIKKI! * alan huipputieteilijät ovat ennustaneet, että vuoteen 2600 mennessä ihmiskunta saa kärsiä historian rankimman hyökyaallon. Katukaa syntejänne ja tilatkaa SENSAATIOLEHTI PLUS, ja me ehkä selviämme!!!       * Astrologian'")
-lore_dump = Luettava("Ramin lappu 0", 0.2, "Lapussa lukee: 'Niin se sitten meni. Hyökyaalto saapui, ja nousi nousemistaan. Jos satelliitit toimisivat enää, näkymä olisi aaaika kiinnostava. Itse olen ainakin samaa mieltä niiden astrologien kanssa, että nyt, kun vettä on hirveän paljon ja ilmaa niin vähän, voitaisiin vaihtaa niiden nimet. Nyt me hengitämme vettä ja juomme ilmaa. Onneksi kävin sillä kesäleirillä. Opinpa sukeltamaan!'")
-tikkaat = Esine("Tikkaat", 10, "Tikkaat eivät yksistään tee mitään.")
+rami_lappu_1 = Luettava("Ramin lappu", 0.1, ("Tilapäinen")) # Teksti korvataan uuden maailman luomisen tai pelin lataamisen yhteydessä.
+rami_lappu_2 = Luettava("Ramin lappu 2", 0.1, ("Tilapäinen")) # Teksti korvataan uuden maailman luomisen tai pelin lataamisen yhteydessä.
+irene_kirja = Luettava("Sensaatiolehti", 0.6, "Selaatte lehteä: 'VESI TAPPAA MEIDÄT KAIKKI! * \nalan huipputieteilijät ovat ennustaneet, että vuoteen 2600 mennessä ihmiskunta saa kärsiä historian rankimman hyökyaallon. Katukaa syntejänne ja tilatkaa SENSAATIOLEHTI PLUS, ja me ehkä selviämme!!!       \n* Astrologian'")
+lore_dump = Luettava("Ramin lappu 0", 0.2, "Lapussa lukee: 'Niin se sitten meni. Hyökyaalto saapui, ja nousi nousemistaan. Jos satelliitit toimisivat enää, näkymä olisi aaaika kiinnostava. Itse olen ainakin samaa mieltä niiden astrologien kanssa, että nyt, kun *vettä* on hirveän *paljon* ja *ilmaa* niin *vähän*, voitaisiin vaihtaa niiden nimet. Nyt me hengitämme vettä ja juomme ilmaa. Onneksi kävin sillä kesäleirillä. Opinpa sukeltamaan!'")
+tikkaat = Esine("Tikkaat", 10, "Uimataidottomat pääsevät näillä korkeuksiin.")
 malja = Luettava("Graalin malja", 1, "\n¨'-.    VOITITTE         ,-^-.__,,_,.-'-.___\n     `^-._+' .   `+_,--'\n      PELIN_,.--''\nOlette saaneet vettä janoonne. Juodessanne graalista mietitte, onko avaruutta enää edes olemassa.\nVoitte jatkaa pelaamista, jos jotain jäi hampaan väliin.", True)
 
 # -- Mekanismit (eivät muutu tallennustiedoston mukaan, joten lisätään täällä) --
@@ -96,7 +95,6 @@ pelaaja = Pelaaja("Tilapäinen", huone_2_2, 20)
 def peli_uusi(pelaajan_nimi, pelaajan_ika):
     # Uusi peli alkaa. Alustetaan se asettamalla kaikki paikoilleen. Tekisi mieli ladata tämäkin vain .json-tiedostosta, mutta ei jaksa.
 
-    huone_5_2.lisaa_esine(kartta)
     huone_2_4.lisaa_esine(rami_lappu_1)
     huone_3_4.lisaa_esine(rami_lappu_2)
     huone_3_4.lisaa_esine(irene_kirja)
@@ -110,9 +108,9 @@ def peli_uusi(pelaajan_nimi, pelaajan_ika):
     # Päivitetään vielä Ramin laput sisältämään pelaajan nimi.
 
     rami_lappu_1.teksti = (f"Lapussa lukee: '{pelaajan_nimi}, minun lähdettyäni olet ainoa sielu koko kylässä.\nEn ole dorka; tiedän, että huomasit, kuinka varastin pressan huvilasta juomavettä kaikki nämä vuodet. Aion jättää tämän tiedon sinulle, hyvä ystäväni. Eksäni talossa on lisää tietoa. Ainoa nainen koko rakennuksessa.'")
-    rami_lappu_2.teksti = (f"Lapussa lukee: '{pelaajan_nimi}, pressan huvilaan on kolme reittiä. Ikkuna, seinästä läpi tai piilotettu, maanalainen tunneli. Ikkuna on rakennuksen eteläisessä seinässä, heikko muuraus pohjoisessa ja tunneli on kadun lähellä piilossa.'")
+    rami_lappu_2.teksti = (f"Lapussa lukee: '{pelaajan_nimi}, pressan huvilaan on kolme reittiä. Ikkuna, seinästä läpi tai piilotettu, maanalainen tunneli. Aukinainen ikkuna on rakennuksen eteläisessä seinässä, heikko muuraus pohjoisessa ja tunneli on kadun lähellä piilossa.'")
 
-    return pelin_data(pelaaja, "Olette asunnossanne. Nukuitte niin huonosti...")
+    return pelin_data(pelaaja, "Olette asunnossanne. Nukuitte niin huonosti...", "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli")
 
 # -- PELIN LATAAMINEN --
 
@@ -140,34 +138,51 @@ def peli_uusi(pelaajan_nimi, pelaajan_ika):
 #                 if esine.id == esine_id:
 #                     huone.lisaa_esine(esine)
         
-#     # -- Ladataan esteet --
+#     # Ladataan esteet
 
 #     huone.pohjoinen_estetty, huone.ita_estetty, huone.etela_estetty, huone.lansi_estetty = data_luettu[str(huone.id) + "esteet"]
+
+#     # Päivitetään vielä Ramin laput sisältämään pelaajan nimi.
+
+#     rami_lappu_1.teksti = (f"Lapussa lukee: '{pelaajan_nimi}, minun lähdettyäni olet ainoa sielu koko kylässä.\nEn ole dorka; tiedän, että huomasit, kuinka varastin pressan huvilasta juomavettä kaikki nämä vuodet. Aion jättää tämän tiedon sinulle, hyvä ystäväni. Eksäni talossa on lisää tietoa. Ainoa nainen koko rakennuksessa.'")
+#     rami_lappu_2.teksti = (f"Lapussa lukee: '{pelaajan_nimi}, pressan huvilaan on kolme reittiä. Ikkuna, seinästä läpi tai piilotettu, maanalainen tunneli. Aukinainen ikkuna on rakennuksen eteläisessä seinässä, heikko muuraus pohjoisessa ja tunneli on kadun lähellä piilossa.'")
 
 # -- PELAAJAN OHJAAMINEN -- 
 
 @app.route("/pelaajan_vuoro/<numerovalinta>") # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
 def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän funktion kautta.
     tarinateksti = pelaaja.sijainti.kuvaus
+    tieto2 = ""
     numerovalinta = int(numerovalinta)
 
     if pelaaja.nykyinen_valikko == "pelaajavalikko":
+        tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
         if numerovalinta == 1: # Liiku
             pelaaja.nykyinen_valikko = "liikkuminen"
-            tarinateksti = "Mihin suuntaan haluatte liikkua? [ 1 (pohjoinen), 2 (itä), 3 (etelä), 4 (länsi) ]"
+            tarinateksti = "Mihin suuntaan haluatte liikkua?"
+            tieto2 =  "1: pohjoinen\n2: itä\n3: etelä\n4: länsi"
+
         elif numerovalinta == 2: # Katso ympärille
             tarinateksti = pelaaja.katso_ymparille()
+
         elif numerovalinta == 3: # Käytä esine tavaraluettelossa
             pelaaja.nykyinen_valikko = "valitse esine"
             tarinateksti = pelaaja.luettele_esineet()
+            tieto2 = "Valitkaa esinettä vastaava numero."
+
         elif numerovalinta == 4: # Nouki esine ympäristöstä
             pelaaja.nykyinen_valikko = "nouki esine"
             tarinateksti = pelaaja.sijainti.luettele_esineet()
+            tieto2 = "Valitkaa esinettä vastaava numero."
+
         elif numerovalinta == 5: # Vuorovaikuta mekanismin kanssa
             pelaaja.nykyinen_valikko = "vuorovaikuta mekanismin kanssa"
             tarinateksti = pelaaja.sijainti.luettele_mekanismit()
+            tieto2 = "Valitkaa mekanismia vastaava numero."
+
         elif numerovalinta == 0:
             tallenna_peli(pelaaja)
+
         else:
             print("Invalidi valinta")
 
@@ -187,22 +202,24 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
         else:
             print("Invalidi valinta")
         tarinateksti = pelaaja.sijainti.kuvaus
+        tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
+
         pelaaja.nykyinen_valikko = "pelaajavalikko"
 
     # -- KAIVINKONEEN VALIKKO --
 
     elif pelaaja.nykyinen_valikko == "kaivinkone":
         tarinateksti = kaivinkone.toiminto(pelaaja, numerovalinta)
+        tieto2 = "1: Kahva vasemmalla\n2: Kahva edessänne\n3: Kahva etuoikealla\n4: Kahva keskioikealla\n5: Kahva oikealla\n6: Poljin vasemmalla\n7: Poljin keskellä\n8: Poljin oikealla\n9: Avaimet\n10: Nappi vieressänne\n0: POIS TÄÄLTÄ"
 
     # -- TAVARALUETTELOVALIKKO (3) --
 
     elif pelaaja.nykyinen_valikko == "valitse esine":
-        tarinateksti = "Haluatteko käyttää vai pudottaa esineen? [ 1 (käytä) 2 (pudota) ]"
         try:
             if numerovalinta == 0:
                 tallenna_peli(pelaaja)
             else:
-                global esinevalinta 
+                global esinevalinta
                 esinevalinta = numerovalinta
                 pelaaja.nykyinen_valikko = "käytä/pudota esine"
         except ValueError:
@@ -211,6 +228,8 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
         except IndexError:
                 print ("Numero ei ole listalla.")
                 pelaaja.nykyinen_valikko = "pelaajavalikko"
+        tarinateksti = "Haluatteko käyttää vai pudottaa esineen?"
+        tieto2 = "1: Käytä\n2: Pudota"
 
     # -- TAVARALUETTELON KÄYTÄ TAI PUDOTA -VALIKKO (3) --
 
@@ -223,6 +242,8 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
             tallenna_peli(pelaaja)
         else:
             print("Invalidi valinta")
+        tarinateksti = pelaaja.sijainti.kuvaus
+        tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
         pelaaja.nykyinen_valikko = "pelaajavalikko"
 
     # -- ESINEEN NOUKKIMISVALIKKO (4) --
@@ -241,12 +262,14 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
             print ("Kirjoittakaa esineen numero ylhäällä olevan listan perusteella.")
         except IndexError:
             print ("Numero ei ole listalla.")
+        tarinateksti = pelaaja.sijainti.kuvaus
+        tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
         pelaaja.nykyinen_valikko = "pelaajavalikko"
 
     # -- MEKANISMIVALIKKO (5) --
     
     elif pelaaja.nykyinen_valikko == "vuorovaikuta mekanismin kanssa":
-        pelaaja.nykyinen_valikko = "pelaajavalikko"
+        pelaaja.nykyinen_valikko = "pelaajavalikko" # Tämä on alussa, jotta kaivinkone voisi ylikirjoittaa nykyisen valikon.
         try:
             if numerovalinta == 0:
                 tallenna_peli(pelaaja)
@@ -258,13 +281,15 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
             print ("Kirjoittakaa mekanismin numero yllä olevan listan perusteella.")
         except IndexError:
             print ("Numero ei ole listalla.")
+        tarinateksti = pelaaja.sijainti.kuvaus
+        tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
 
-    return pelin_data(pelaaja, tarinateksti)
+    return pelin_data(pelaaja, tarinateksti, tieto2)
 # --------------------------
 
 # # -- Tallentaminen --
 
-def pelin_data(pelaaja, tarinateksti):
+def pelin_data(pelaaja, tarinateksti, tieto2):
     tallennus_data = {
         "pelaajan nimi": pelaaja.nimi,
         "pelaajan ikä": pelaaja.ika,
@@ -272,7 +297,7 @@ def pelin_data(pelaaja, tarinateksti):
         "pelaajan sijainti": pelaaja.sijainti.id,
         "pelaajan valikko": pelaaja.nykyinen_valikko,
         "tarinateksti": tarinateksti,
-        "tieto2": "lightning shoots from my fingertips"
+        "tieto2": tieto2
     }
 
     for huone in Huone.lista_huoneista:
@@ -283,7 +308,7 @@ def pelin_data(pelaaja, tarinateksti):
 
 def tallenna_peli(pelaaja):
     with open (f"{pelaaja.nimi}.json", "w") as tallennus:
-        json.dump(pelin_data(pelaaja, "Tervetuloa takaisin"), tallennus)
+        json.dump(pelin_data(pelaaja, "Tervetuloa takaisin", "1: Liiku\n2: Katso ympärille\n3: Käytä esine tavaraluettelossa\n4: Nouki esine ympäristöstä\n5: Vuorovaikuta mekanismin kanssa\n0: Tallenna peli"), tallennus)
 
 if __name__ == '__main__': # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
     app.run(host='127.0.0.1', port=3000, use_reloader=True) # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
