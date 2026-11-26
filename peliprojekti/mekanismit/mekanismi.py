@@ -84,10 +84,10 @@ class Kaivinkone(Este):
             self.seina_hp = 2
             self.kasijarru = False
             self.kytkin = False
-            tarinateksti = ("Edessänne on viisi kahvaa, kolme poljinta ja kaksi nappia. Missään ei ole ohjeita. Avain on jo koneessa, mutta kone ei ole käynnissä.\nMitä haluatte tehdä?\n1: Kahva vasemmalla\n2: Kahva edessänne\n3: Kahva etuoikealla\n4: Kahva keskioikealla\n5: Kahva oikealla\n6: Poljin vasemmalla\n7: Poljin keskellä\n8: Poljin oikealla\n9: Nappi edessänne\n10: Nappi vieressänne\n0: POIS TÄÄLTÄ")
+            tarinateksti = ("Edessänne on viisi kahvaa, kolme poljinta ja kaksi nappia. Missään ei ole ohjeita. Avain on jo koneessa, mutta kone ei ole käynnissä.\nMitä haluatte tehdä?\n1: Kahva vasemmalla\n2: Kahva edessänne\n3: Kahva etuoikealla\n4: Kahva keskioikealla\n5: Kahva oikealla\n6: Poljin vasemmalla\n7: Poljin keskellä\n8: Poljin oikealla\n9: Avaimet\n10: Nappi vieressänne\n0: POIS TÄÄLTÄ")
             return tarinateksti
     def toiminto(self, pelaaja, numerovalinta):
-        if numerovalinta == "1":
+        if numerovalinta == 1:
             if self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")
                 return tarinateksti
@@ -102,12 +102,13 @@ class Kaivinkone(Este):
                         tarinateksti += ("\nTällä kertaa koura leikkaa suoraan seinän läpi. Tunnette hytissä tärähdyksiä vielä useita sekunteja osuman jälkeen. Seinä on murskattu.")
                         self.seina_hp = 0
                         self.vaikutusalue.etela_estetty = False
-                        pelaaja.nykyinen_valikko = "pelaaja_valikko"
+                        pelaaja.nykyinen_valikko = "pelaajavalikko"
                         return tarinateksti
                 elif self.suunta == "etelään" and self.etaisyys < 2:
                     tarinateksti = ("Kouralla ei ole tilaa kerätä voimaa. Se tömähtää seinään heikosti. Seinälle ei käy kuinkaan.")
                     return tarinateksti
-        elif numerovalinta == "2":
+            return tarinateksti
+        elif numerovalinta == 2:
             if self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")
                 return tarinateksti
@@ -122,14 +123,14 @@ class Kaivinkone(Este):
                     self.suunta = "pohjoiseen"
                 tarinateksti = (f"Kaivinkone pyörii myötäpäivään. Se osoittaa nyt {self.suunta}.")
                 return tarinateksti
-        elif numerovalinta == "3":
+        elif numerovalinta == 3:
             if self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")
                 return tarinateksti
             else:
                 tarinateksti = ("Koura liikkuu vaakasuorassa, mutta todella vähän. Huoltoryhmä on mokannut.")
                 return tarinateksti
-        elif numerovalinta == "4":
+        elif numerovalinta == 4:
             if self.kasijarru == False:
                 tarinateksti = ("Kahva jäi asentoonsa. Kaivinkone nytkähti hieman. Jokin on nyt päällä.")
                 self.kasijarru = True
@@ -138,14 +139,14 @@ class Kaivinkone(Este):
                 tarinateksti = ("Palautatte kahvan alkuperäiseen asentoonsa.")
                 self.kasijarru = False
                 return tarinateksti
-        elif numerovalinta == "5":
+        elif numerovalinta == 5:
             if self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")
                 return tarinateksti
             else:
                 tarinateksti = ("Hytti keinahtaa lievästi.")
                 return tarinateksti
-        elif numerovalinta == "6":
+        elif numerovalinta == 6:
             if self.kasijarru == True or self.kytkin == False or self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")
                 return tarinateksti
@@ -159,14 +160,14 @@ class Kaivinkone(Este):
                         tarinateksti = ("Kaivuri ajaa suoraan seinästä läpi! Ette näe kaaosta, mutta kuulette sen ja tunnette tärinän luuytimissänne. Tämä oli tässä.")
                         self.seina_hp = 0
                         self.vaikutusalue.etela_estetty = False
-                        pelaaja.nykyinen_valikko = "pelaaja_valikko"
+                        pelaaja.nykyinen_valikko = "pelaajavalikko"
                     tarinateksti = ("Kaivuri liikkuu taaksepäin.")
                     self.etaisyys -= 1
                     return tarinateksti
                 elif self.suunta == "itään" or self.suunta == "länteen":
                     tarinateksti = ("Kaivuri törmää johonkin. Tähän suuntaan ei voi liikkua.")
                     return tarinateksti
-        elif numerovalinta == "7":
+        elif numerovalinta == 7:
             if self.kytkin == True:
                 tarinateksti = ("Lakkaatte painamasta kytkintä.")
                 self.kytkin = False
@@ -175,7 +176,7 @@ class Kaivinkone(Este):
                 tarinateksti = ("Kaivuri nytkähtää vähän. Tiedätte sen verran vanhasta teknologiasta, että tunnistatte tämän kytkimeksi. Pidätte sitä pohjassa.")
                 self.kytkin = True
                 return tarinateksti
-        elif numerovalinta == "8":
+        elif numerovalinta == 8:
             if self.kasijarru == True or self.kytkin == False or self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")
                 return tarinateksti
@@ -185,7 +186,7 @@ class Kaivinkone(Este):
                         tarinateksti = ("KAIVURI AJAA SUORAAN SEINÄSTÄ LÄPI! Tuulilasista lentää tiiliä ja laastia, mutta mikään ei osu teihin! Tämä oli tässä.")
                         self.seina_hp = 0
                         self.vaikutusalue.etela_estetty = False
-                        pelaaja.nykyinen_valikko = "pelaaja_valikko"
+                        pelaaja.nykyinen_valikko = "pelaajavalikko"
                         return tarinateksti
                     tarinateksti = ("Kaivuri liikkuu eteenpäin.")
                     self.etaisyys -= 1
@@ -197,21 +198,21 @@ class Kaivinkone(Este):
                 elif self.suunta == "itään" or self.suunta == "länteen":
                     tarinateksti = ("Kaivuri törmää johonkin. Tähän suuntaan ei voi liikkua.")
                     return tarinateksti
-        elif numerovalinta == "9":
+        elif numerovalinta == 9:
             if self.virta == False:
-                tarinateksti = ("Valot välähtävät päälle. Moottori alkaa hurista himmeästi. Toivottavasti tämä laite pysyy vielä vähän aikaa ehjänä.")
+                tarinateksti = ("Väännätte ruosteisia avaimia. Valot välähtävät päälle. Moottori alkaa hurista himmeästi. Toivottavasti tämä laite pysyy vielä vähän aikaa ehjänä.")
                 self.virta = True
                 return tarinateksti
             else:
                 tarinateksti = ("Kaivuri hiljenee ja hämärtyy taas.")
                 self.virta = False
                 return tarinateksti
-        elif numerovalinta == "10":
+        elif numerovalinta == 10:
             if self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")
                 return tarinateksti
             else:
                 tarinateksti = ("Ajovalot välähtävät hetkeksi päälle, mutta sammuvat heti.")
                 return tarinateksti
-        elif numerovalinta == "0":
-            pelaaja.nykyinen_valikko = "pelaaja_valikko"
+        elif numerovalinta == 0:
+            pelaaja.nykyinen_valikko = "pelaajavalikko"

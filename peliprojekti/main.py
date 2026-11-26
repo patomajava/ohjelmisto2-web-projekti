@@ -103,11 +103,16 @@ def peli_uusi(pelaajan_nimi, pelaajan_ika):
     huone_u_1.lisaa_esine(lore_dump)
     huone_6_4.lisaa_esine(tikkaat)
     maali.lisaa_esine(malja)
-    global pelaaja
+    global pelaaja # Jotta pelaajan vuoro -funktio voisi lukea ja mutatoida pelaajaa
     pelaaja.nimi = pelaajan_nimi
     pelaaja.ika = pelaajan_ika
 
-    return pelin_data(pelaaja, "Teillä on jano...")
+    # Päivitetään vielä Ramin laput sisältämään pelaajan nimi.
+
+    rami_lappu_1.teksti = (f"Lapussa lukee: '{pelaajan_nimi}, minun lähdettyäni olet ainoa sielu koko kylässä.\nEn ole dorka; tiedän, että huomasit, kuinka varastin pressan huvilasta juomavettä kaikki nämä vuodet. Aion jättää tämän tiedon sinulle, hyvä ystäväni. Eksäni talossa on lisää tietoa. Ainoa nainen koko rakennuksessa.'")
+    rami_lappu_2.teksti = (f"Lapussa lukee: '{pelaajan_nimi}, pressan huvilaan on kolme reittiä. Ikkuna, seinästä läpi tai piilotettu, maanalainen tunneli. Ikkuna on rakennuksen eteläisessä seinässä, heikko muuraus pohjoisessa ja tunneli on kadun lähellä piilossa.'")
+
+    return pelin_data(pelaaja, "Olette asunnossanne. Nukuitte niin huonosti...")
 
 # -- PELIN LATAAMINEN --
 
@@ -140,12 +145,11 @@ def peli_uusi(pelaajan_nimi, pelaajan_ika):
 #     huone.pohjoinen_estetty, huone.ita_estetty, huone.etela_estetty, huone.lansi_estetty = data_luettu[str(huone.id) + "esteet"]
 
 # -- PELAAJAN OHJAAMINEN -- 
+
 @app.route("/pelaajan_vuoro/<numerovalinta>") # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
-def pelaajan_vuoro(numerovalinta):
+def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän funktion kautta.
     tarinateksti = pelaaja.sijainti.kuvaus
     numerovalinta = int(numerovalinta)
-
-    # -- PELAAJAVALIKKO --
 
     if pelaaja.nykyinen_valikko == "pelaajavalikko":
         if numerovalinta == 1: # Liiku
@@ -163,7 +167,7 @@ def pelaajan_vuoro(numerovalinta):
             pelaaja.nykyinen_valikko = "vuorovaikuta mekanismin kanssa"
             tarinateksti = pelaaja.sijainti.luettele_mekanismit()
         elif numerovalinta == 0:
-            tallenna_peli(pelaaja.nimi)
+            tallenna_peli(pelaaja)
         else:
             print("Invalidi valinta")
 
@@ -179,7 +183,7 @@ def pelaajan_vuoro(numerovalinta):
         elif numerovalinta == 4: # Länsi
             pelaaja.liiku("L")
         elif numerovalinta == 0:
-            tallenna_peli(pelaaja.nimi)
+            tallenna_peli(pelaaja)
         else:
             print("Invalidi valinta")
         tarinateksti = pelaaja.sijainti.kuvaus
@@ -190,28 +194,33 @@ def pelaajan_vuoro(numerovalinta):
     elif pelaaja.nykyinen_valikko == "kaivinkone":
         tarinateksti = kaivinkone.toiminto(pelaaja, numerovalinta)
 
-    # -- ESINEVALIKKO (3) --
+    # -- TAVARALUETTELOVALIKKO (3) --
 
     elif pelaaja.nykyinen_valikko == "valitse esine":
         tarinateksti = "Haluatteko käyttää vai pudottaa esineen? [ 1 (käytä) 2 (pudota) ]"
         try:
-            global esinevalinta 
-            esinevalinta = numerovalinta
-            pelaaja.nykyinen_valikko = "käytä/pudota esine"
+            if numerovalinta == 0:
+                tallenna_peli(pelaaja)
+            else:
+                global esinevalinta 
+                esinevalinta = numerovalinta
+                pelaaja.nykyinen_valikko = "käytä/pudota esine"
         except ValueError:
-            print ("Kirjoittakaa esineen numero ylhäällä olevan listan perusteella.")
-            pelaaja.nykyinen_valikko = "pelaajavalikko"
+                print ("Kirjoittakaa esineen numero ylhäällä olevan listan perusteella.")
+                pelaaja.nykyinen_valikko = "pelaajavalikko"
         except IndexError:
-            print ("Numero ei ole listalla.")
-            pelaaja.nykyinen_valikko = "pelaajavalikko"
+                print ("Numero ei ole listalla.")
+                pelaaja.nykyinen_valikko = "pelaajavalikko"
 
-    # -- KÄYTÄ TAI PUDOTA -VALIKKO (3) --
+    # -- TAVARALUETTELON KÄYTÄ TAI PUDOTA -VALIKKO (3) --
 
     elif pelaaja.nykyinen_valikko == "käytä/pudota esine":
         if numerovalinta == 1:
             tarinateksti = pelaaja.kayta_esine(esinevalinta)
         elif numerovalinta == 2:
             tarinateksti = pelaaja.pudota_esine(esinevalinta)
+        elif numerovalinta == 0:
+            tallenna_peli(pelaaja)
         else:
             print("Invalidi valinta")
         pelaaja.nykyinen_valikko = "pelaajavalikko"
@@ -220,11 +229,14 @@ def pelaajan_vuoro(numerovalinta):
 
     elif pelaaja.nykyinen_valikko == "nouki esine":
         try:
-            numerovalinta -= 1
-            if numerovalinta < len(pelaaja.sijainti.esineet):
-                hyvaksynta, tarinateksti = pelaaja.lisaa_esine(pelaaja.sijainti.esineet[esinevalinta])
-                if hyvaksynta == True: # Eli jos lisaa_esine -metodi hyväksyy tämän.
-                    pelaaja.sijainti.esineet.pop(numerovalinta)
+            if numerovalinta == 0:
+                tallenna_peli(pelaaja)
+            else:
+                numerovalinta -= 1
+                if numerovalinta < len(pelaaja.sijainti.esineet):
+                    hyvaksynta, tarinateksti = pelaaja.lisaa_esine(pelaaja.sijainti.esineet[numerovalinta])
+                    if hyvaksynta == True: # Eli jos lisaa_esine -metodi hyväksyy tämän.
+                        pelaaja.sijainti.esineet.pop(numerovalinta)
         except ValueError:
             print ("Kirjoittakaa esineen numero ylhäällä olevan listan perusteella.")
         except IndexError:
@@ -236,9 +248,12 @@ def pelaajan_vuoro(numerovalinta):
     elif pelaaja.nykyinen_valikko == "vuorovaikuta mekanismin kanssa":
         pelaaja.nykyinen_valikko = "pelaajavalikko"
         try:
-            numerovalinta -= 1
-            if numerovalinta < len(pelaaja.sijainti.mekanismit):
-                tarinateksti = pelaaja.sijainti.mekanismit[numerovalinta].kayta_mekanismi(pelaaja)
+            if numerovalinta == 0:
+                tallenna_peli(pelaaja)
+            else:
+                numerovalinta -= 1
+                if numerovalinta < len(pelaaja.sijainti.mekanismit):
+                    tarinateksti = pelaaja.sijainti.mekanismit[numerovalinta].kayta_mekanismi(pelaaja)
         except ValueError:
             print ("Kirjoittakaa mekanismin numero yllä olevan listan perusteella.")
         except IndexError:
@@ -268,7 +283,7 @@ def pelin_data(pelaaja, tarinateksti):
 
 def tallenna_peli(pelaaja):
     with open (f"{pelaaja.nimi}.json", "w") as tallennus:
-        json.dump(pelin_data(pelaaja), tallennus)
+        json.dump(pelin_data(pelaaja, "Tervetuloa takaisin"), tallennus)
 
 if __name__ == '__main__': # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
     app.run(host='127.0.0.1', port=3000, use_reloader=True) # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN
