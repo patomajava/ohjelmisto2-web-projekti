@@ -6,7 +6,7 @@ class Pelaaja():
         self.ika = ika
         self.tilavuusraja = 10
         self.tilavuus = 0
-        self.nykyinen_valikko = "pelaajavalikko"
+        self.nykyinen_valikko = "pelaajavalikko" # Tämän perusteella pelaajan ohjaaminen toimii main.py:ssä.
 
     def liiku(self, suunta):
         self.suunta = suunta
@@ -40,11 +40,8 @@ class Pelaaja():
                 self.sijainti = self.sijainti.lannessa
 
     def katso_ymparille(self):
-        if self.sijainti.kuvaus != "":
-            tarinateksti = (self.sijainti.kuvaus)
-        else:
-            tarinateksti = ""
-        tarinateksti += (f"\nOlette {self.sijainti.prepositio}.\n")
+        tarinateksti = (f"Olette {self.sijainti.prepositio}. ")
+        tarinateksti += (self.sijainti.kuvaus)
         if self.sijainti.pohjoinen_estetty == True:
             tarinateksti += ("\nPohjoiseen on pääsy estetty.")
         if self.sijainti.ita_estetty == True:

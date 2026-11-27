@@ -1,7 +1,9 @@
 class Mekanismi():
+    lista_mekanismeista = []
     def __init__(self, nimi):
         self.nimi = nimi
-        # Ei ID:tä, koska mekanismin sijainti ei muutu. Se lisätään sijaintiinsa main.py:n sisällä.
+        self.id = len(Mekanismi.lista_mekanismeista) # Käytetään mekanismin vaiheen ja käytettävyyden tallentamiseen.
+        Mekanismi.lista_mekanismeista.append(self)
 
     def kayta_mekanismi(self, pelaaja):
         tarinateksti = (f"Käytitte mekanismin {self.nimi}.")
@@ -15,7 +17,7 @@ class Mekanismi():
             return ("Teiltä puuttuu jokin esine.")
 
 class Este(Mekanismi):
-    def __init__(self, nimi, vaikutusalue, toimintokuvaus = ("Käytitte mekanismin."), kertakayttoinen = False, esta_pohjoinen = False, esta_ita = False, esta_etela = False, esta_lansi = False, vaadittu_esine = "auto"):
+    def __init__(self, nimi, vaikutusalue, toimintokuvaus = ("Käytitte mekanismin."), kertakayttoinen = False, esta_pohjoinen = False, esta_ita = False, esta_etela = False, esta_lansi = False, vaadittu_esine = "auto", kaksisuuntainen = True):
         super().__init__(nimi)
         self.vaikutusalue = vaikutusalue # MINKÄ huoneen yhteydet muutetaan. Itse mekanismin sijainti on erikseen.
         self.toimintokuvaus = toimintokuvaus
@@ -25,52 +27,84 @@ class Este(Mekanismi):
         self.esta_etela = esta_etela
         self.esta_lansi = esta_lansi
         self.vaadittu_esine = vaadittu_esine
-        self.mekanismi_vaihe = True # Jos False, vaikutus on päinvastainen. Pohjoisen sulkeminen olisi nyt pohjoisen avaaminen.
-        self.mekanismi_kaytettava = True # Muuttuu riippuen esim. kertakäyttöisyydestä.
+        self.kaksisuuntainen = kaksisuuntainen # Esim. jos vaikutusalueessa poistetaan este pohjoiseen, siellä olevasta huoneesta poistetaan este etelään.
+        self.vaihe = True # Jos False, vaikutus on päinvastainen. Pohjoisen sulkeminen olisi nyt pohjoisen avaaminen.
+        self.kaytettava = True # Muuttuu riippuen esim. kertakäyttöisyydestä.
 
     def kayta_mekanismi(self, pelaaja): # Jos haluaa huoneeseen estetyn suunnan pelin alusta asti, se pitää tehdä huonetta luodessa.
-        if self.mekanismi_kaytettava == False:
+        if self.kaytettava == False:
             tarinateksti = (f"Mekanismia {self.nimi} ei voi käyttää!")
         elif self.vaadittu_esine != "auto" and self.vaadittu_esine not in pelaaja.esineet:
                 tarinateksti = (f"Mekanismi {self.nimi} vaatii esineen, jota teillä ei ole.")
         else:
             tarinateksti = (self.toimintokuvaus)
-            if self.mekanismi_vaihe == True:
+
+            if self.vaihe == True:
+                
                 if self.esta_pohjoinen == True or self.esta_pohjoinen == False: # Esim. jos kirjoittaa "auto", mikään ei muutu käytettäessä mekanismia.
                     self.vaikutusalue.pohjoinen_estetty = self.esta_pohjoinen
+                    if self.kaksisuuntainen:
+                        self.vaikutusalue.pohjoisessa.etela_estetty = self.esta_pohjoinen
                     tarinateksti += (f"\nPohjoinen estetty: {self.vaikutusalue.pohjoinen_estetty}!")
+                
                 if self.esta_ita == True or self.esta_ita == False:
                     self.vaikutusalue.ita_estetty = self.esta_ita
+                    if self.kaksisuuntainen:
+                        self.vaikutusalue.idassa.lansi_estetty = self.esta_ita
                     tarinateksti += (f"\nItä estetty: {self.vaikutusalue.ita_estetty}!")
+                
                 if self.esta_etela == True or self.esta_etela == False:
                     self.vaikutusalue.etela_estetty = self.esta_etela
+                    if self.kaksisuuntainen:
+                        self.vaikutusalue.etalassa.pohjoinen_estetty = self.esta_etela
                     tarinateksti += (f"\nEtelä estetty: {self.vaikutusalue.etela_estetty}!")
+                
                 if self.esta_lansi == True or self.esta_lansi == False:
                     self.vaikutusalue.lansi_estetty = self.esta_lansi
+                    if self.kaksisuuntainen:
+                        self.vaikutusalue.lannessa.ita_estetty = self.esta_lansi
                     tarinateksti += (f"\nLänsi estetty: {self.vaikutusalue.lansi_estetty}!")
+                
                 if self.kertakayttoinen == True:
-                    self.mekanismi_kaytettava = False
+                    self.kaytettava = False
                     tarinateksti += (f"\nMekanismi {self.nimi} ei ole enää käytettävissä.")
-                self.mekanismi_vaihe = False
+                self.vaihe = False
             
             else:
                 tarinateksti += (f"Mekanismi {self.nimi} käytettiin taas.")
-                self.vaikutusalue.pohjoinen_estetty = not self.esta_pohjoinen
-                tarinateksti += (f"Pohjoinen estetty: {self.vaikutusalue.pohjoinen_estetty}!")
-                self.vaikutusalue.ita_estetty = not self.esta_ita
-                tarinateksti += (f"Itä estetty: {self.vaikutusalue.ita_estetty}!")
-                self.vaikutusalue.etela_estetty = not self.esta_etela
-                tarinateksti += (f"Etelä estetty: {self.vaikutusalue.etela_estetty}!")
-                self.vaikutusalue.lansi_estetty = not self.esta_lansi
-                tarinateksti += (f"Länsi estetty: {self.vaikutusalue.lansi_estetty}!")
-                self.mekanismi_vaihe = True
+
+                if self.esta_pohjoinen == True or self.esta_pohjoinen == False:
+                    self.vaikutusalue.pohjoinen_estetty = not self.esta_pohjoinen
+                    tarinateksti += (f"Pohjoinen estetty: {self.vaikutusalue.pohjoinen_estetty}!")
+                    if self.kaksisuuntainen:
+                        self.vaikutusalue.pohjoisessa.etela_estetty = not self.esta_pohjoinen
+
+                if self.esta_ita == True or self.esta_ita == False:
+                    self.vaikutusalue.ita_estetty = not self.esta_ita
+                    tarinateksti += (f"Itä estetty: {self.vaikutusalue.ita_estetty}!")
+                    if self.kaksisuuntainen:
+                        self.vaikutusalue.idassa.lansi_estetty = not self.esta_ita
+
+                if self.esta_etela == True or self.esta_etela == False:
+                    self.vaikutusalue.etela_estetty = not self.esta_etela
+                    tarinateksti += (f"Etelä estetty: {self.vaikutusalue.etela_estetty}!")
+                    if self.kaksisuuntainen:
+                        self.vaikutusalue.etalassa.pohjoinen_estetty = not self.esta_etela
+
+                if self.esta_lansi == True or self.esta_lansi == False:
+                    self.vaikutusalue.lansi_estetty = not self.esta_lansi
+                    tarinateksti += (f"Länsi estetty: {self.vaikutusalue.lansi_estetty}!")
+                    if self.kaksisuuntainen:
+                        self.vaikutusalue.lannessa.ita_estetty = not self.esta_lansi
+                
+                self.vaihe = True
         return tarinateksti
 
 class Kaivinkone(Este):
     def __init__(self, nimi, vaikutusalue, toimintokuvaus="\nOlette kaivinkoneessa.", kertakayttoinen=True, esta_pohjoinen="auto", esta_ita="auto", esta_etela=False, esta_lansi="auto", vaadittu_esine="auto"):
         super().__init__(nimi, vaikutusalue, toimintokuvaus, kertakayttoinen, esta_pohjoinen, esta_ita, esta_etela, esta_lansi, vaadittu_esine)
 
-    def kayta_mekanismi(self, pelaaja):
+    def kayta_mekanismi(self, pelaaja): # Tämän pääasiallinen tarkoitus on siirtää pelaaja kaivinkone-valikkoon, jossa hän on jumissa kunnes poistuu 0:lla.
         tarinateksti = (self.toimintokuvaus)
         if self.vaikutusalue.etela_estetty == False:
             tarinateksti = ("Seinä on jo murrettu.")
@@ -86,7 +120,7 @@ class Kaivinkone(Este):
             self.kytkin = False
             tarinateksti = ("Edessänne on viisi kahvaa, kolme poljinta ja kaksi nappia. Missään ei ole ohjeita. Avain on jo koneessa, mutta kone ei ole käynnissä.")
             return tarinateksti
-    def toiminto(self, pelaaja, numerovalinta):
+    def toiminto(self, pelaaja, numerovalinta): # Toteutuu vain, jos pelaaja on edellämainitussa kaivinkone-valikossa.
         if numerovalinta == 1:
             if self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")
