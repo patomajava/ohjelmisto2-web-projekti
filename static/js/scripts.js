@@ -26,7 +26,10 @@ async function paivitaPeli(valinta) {
         }
         const data = await response.json();
 
+        nykyinen_huone(data);
         tarinatekstit(data);
+        tavaraluettelo(data);
+        esineet_ja_mekanismit(data);
 
         return data;
     }
@@ -35,11 +38,40 @@ async function paivitaPeli(valinta) {
     };
 }
 
-function tarinatekstit(data) {
+function nykyinen_huone(data) {
+    const tekstilaatikko = document.getElementById("nykyinen_huone");
+    tekstilaatikko.innerHTML = "";
 
+    tekstilaatikko.textContent = data.testitieto2.testitieto3;
+    return
+}
+
+function tarinatekstit(data) {
     const tekstilaatikko = document.getElementById("tarinateksti");
     tekstilaatikko.innerHTML = "";
 
-    tekstilaatikko.textContent = data.tarinateksti;
+    tekstilaatikko.textContent = data.testitieto;
+    return
+}
 
+function tavaraluettelo(data) {
+    const tavaraluettelo = document.getElementById("tavaraluettelo");
+    
+    for (let i = 0; i < data.tavaraluettelo.length; i++) {
+        let item = document.createElement("li");
+        item.textContent = data.tavaraluettelo[i];
+        tavaraluettelo.appendChild(item)
+    }
+    return
+}
+
+function esineet_ja_mekanismit(data) {
+    const esineet_ja_mekanismit = document.getElementById("esineet_ja_mekanismit");
+
+    for (let i = 0; i < data.esineet_ja_mekanismit.length; i++) {
+        let item = document.createElement("li");
+        item.textContent = data.esineet_ja_mekanismit[i];
+        esineet_ja_mekanismit.appendChild(item)
+    }
+    return
 }

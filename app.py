@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request
-from peliprojekti import main
+from peliprojekti.gamestate import getGameState
 
 app = Flask(__name__)
 
@@ -40,12 +40,17 @@ def tulokset():
 
 @app.route("/pelin_tilanne")
 def pelin_tilanne():
-    tarinateksti = "Herra Hakkarainen on väsynyt"
-    tieto2 = "Tieto 2"
-    return jsonify({
-        "tarinateksti": tarinateksti,
-        "tieto2": tieto2
-        })
+
+    valinta = request.args.get("valinta")
+    tiedot = getGameState(valinta)
+    return jsonify(tiedot)
+    
+    # tarinateksti = "Herra Hakkarainen on väsynyt"
+    # tieto2 = "Tieto 2"
+    # return jsonify({
+    #     "tarinateksti": tarinateksti,
+    #     "tieto2": tieto2
+    #     })
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=3000, use_reloader=True)
