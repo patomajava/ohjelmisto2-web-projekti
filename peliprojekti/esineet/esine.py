@@ -4,7 +4,7 @@ class Esine():
         self.nimi = nimi
         self.tilavuus = tilavuus
         self.toimintokuvaus = toimintokuvaus
-        self.printtaaja = printtaaja # Esine käytetään heti, kun sen noukkii. Tämä toiminto on pelaaja-luokan sisällä. Tässä tapauksessa Graalin malja vain printtaa konsoliin.
+        self.printtaaja = printtaaja # Esine käytetään heti, kun sen noukkii. Tämä toiminto on pelaaja-luokan sisällä. Tässä tapauksessa Graalin malja vain printtaa konsoliin, mutta web-versiossa tämä toiminto korvataan tulokset-sivulla.
         self.id = len(Esine.lista_esineista) # Käytetään tallentamiseen ja lataamiseen.
         Esine.lista_esineista.append(self)
 

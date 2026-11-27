@@ -85,6 +85,12 @@ class Huone():
         self.esteet_serialisoitu = [self.pohjoinen_estetty, self.ita_estetty, self.etela_estetty, self.lansi_estetty]
         return self.esteet_serialisoitu
 
+    def serialisoi_mekanismit(self): # Tallennetaan mekanismien ID:t.
+        self.mekanismit_serialisoitu = []
+        for mekanismi in self.mekanismit:
+            self.mekanismit_serialisoitu.append(mekanismi.id)
+        return self.mekanismit_serialisoitu
+
 class Tyhja(Huone): # Jos jossakin suunnassa ei ole mitää, siellä on tämä "huone".
     def __init__(self, nimi = "ei mitään", prepositio = "ei missään. Teidän ei kuuluisi olla täällä."):
         self.nimi = nimi
