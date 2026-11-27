@@ -70,7 +70,7 @@ class Kaivinkone(Este):
     def __init__(self, nimi, vaikutusalue, toimintokuvaus="\nOlette kaivinkoneessa.", kertakayttoinen=True, esta_pohjoinen="auto", esta_ita="auto", esta_etela=False, esta_lansi="auto", vaadittu_esine="auto"):
         super().__init__(nimi, vaikutusalue, toimintokuvaus, kertakayttoinen, esta_pohjoinen, esta_ita, esta_etela, esta_lansi, vaadittu_esine)
 
-    def kayta_mekanismi(self, pelaaja):
+    def kayta_mekanismi(self, pelaaja): # Tämän pääasiallinen tarkoitus on siirtää pelaaja kaivinkone-valikkoon, jossa hän on jumissa kunnes poistuu 0:lla.
         tarinateksti = (self.toimintokuvaus)
         if self.vaikutusalue.etela_estetty == False:
             tarinateksti = ("Seinä on jo murrettu.")
@@ -86,7 +86,7 @@ class Kaivinkone(Este):
             self.kytkin = False
             tarinateksti = ("Edessänne on viisi kahvaa, kolme poljinta ja kaksi nappia. Missään ei ole ohjeita. Avain on jo koneessa, mutta kone ei ole käynnissä.")
             return tarinateksti
-    def toiminto(self, pelaaja, numerovalinta):
+    def toiminto(self, pelaaja, numerovalinta): # Toteutuu vain, jos pelaaja on edellämainitussa kaivinkone-valikossa.
         if numerovalinta == 1:
             if self.virta == False:
                 tarinateksti = ("Mitään ei tapahdu.")

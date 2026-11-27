@@ -162,7 +162,7 @@ def peli_lataa(tallennus):
 
 @app.route("/pelaajan_vuoro/<numerovalinta>") # DEBUG - FLASK ON LOPULLISESSA VERSIOSSA ERIKSEEN?
 def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän funktion kautta.
-    tarinateksti = pelaaja.sijainti.kuvaus
+    tarinateksti = (f"Olette {pelaaja.sijainti.prepositio}.")
     tieto2 = ""
     numerovalinta = int(numerovalinta)
 
@@ -212,7 +212,7 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
             tallenna_peli(pelaaja)
         else:
             print("Invalidi valinta")
-        tarinateksti = pelaaja.sijainti.kuvaus
+        tarinateksti = (f"Olette {pelaaja.sijainti.prepositio}.")
         tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
 
         pelaaja.nykyinen_valikko = "pelaajavalikko"
@@ -253,7 +253,7 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
             tallenna_peli(pelaaja)
         else:
             print("Invalidi valinta")
-        tarinateksti = pelaaja.sijainti.kuvaus
+        tarinateksti = (f"Olette {pelaaja.sijainti.prepositio}.")
         tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
         pelaaja.nykyinen_valikko = "pelaajavalikko"
 
@@ -273,7 +273,7 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
             print ("Kirjoittakaa esineen numero ylhäällä olevan listan perusteella.")
         except IndexError:
             print ("Numero ei ole listalla.")
-        tarinateksti = pelaaja.sijainti.kuvaus
+        tarinateksti = (f"Olette {pelaaja.sijainti.prepositio}.")
         tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
         pelaaja.nykyinen_valikko = "pelaajavalikko"
 
@@ -292,7 +292,7 @@ def pelaajan_vuoro(numerovalinta): # Jokainen pelaajan valinta kulkee tämän fu
             print ("Kirjoittakaa mekanismin numero yllä olevan listan perusteella.")
         except IndexError:
             print ("Numero ei ole listalla.")
-        tarinateksti = pelaaja.sijainti.kuvaus
+        tarinateksti = (f"Olette {pelaaja.sijainti.prepositio}.")
         tieto2 = "1. Liiku\n2. Katso ympärille\n3. Käytä esine tavaraluettelossa\n4. Nouki esine ympäristöstä\n5. Vuorovaikuta mekanismin kanssa\n0. Tallenna peli"
 
     return pelin_data(pelaaja, tarinateksti, tieto2)
