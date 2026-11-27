@@ -5,7 +5,7 @@
 const nappi_uusi = document.getElementById("uusi-peli");
 const nappi_lataa = document.getElementById("lataa-peli");
 const nappi_poistu = document.getElementById("poistu");
-const valintanapit = document.querySelectorAll("#pelinappi");
+const valintanapit = document.querySelectorAll(".pelinappi");
 
 nappi_uusi?.addEventListener("click", () => {window.location.href = "/peli_uusi"});
 nappi_lataa?.addEventListener("click", () => {window.location.href = "/peli_lataa"});
@@ -25,6 +25,7 @@ async function paivitaPeli(valinta) {
             throw new Error("HTTP-virhe. Koodi: " + response.status);
         }
         const data = await response.json();
+        console.log("received gamestate:", data)
 
         nykyinen_huone(data);
         tarinatekstit(data);
@@ -42,7 +43,7 @@ function nykyinen_huone(data) {
     const tekstilaatikko = document.getElementById("nykyinen_huone");
     tekstilaatikko.innerHTML = "";
 
-    tekstilaatikko.textContent = data.testitieto2.testitieto3;
+    tekstilaatikko.textContent = data.nykyinen_huone;
     return
 }
 
@@ -50,28 +51,42 @@ function tarinatekstit(data) {
     const tekstilaatikko = document.getElementById("tarinateksti");
     tekstilaatikko.innerHTML = "";
 
-    tekstilaatikko.textContent = data.testitieto;
+    tekstilaatikko.textContent = data.tarinateksti;
+    return
+}
+
+function kontrollit(data) { //ei toimi?
+    const kontrollit = document.getElementById("kontrollit");
+    kontrollit.replaceChildren();
+    
+    for (let i in data.kontrollit) {
+        const item = document.createElement("li");
+        item.textContent = data.kontrollit[i];
+        kontrollit.appendChild(item);
+    }
     return
 }
 
 function tavaraluettelo(data) {
     const tavaraluettelo = document.getElementById("tavaraluettelo");
+    tavaraluettelo.replaceChildren();
     
-    for (let i = 0; i < data.tavaraluettelo.length; i++) {
-        let item = document.createElement("li");
+    for (let i in data.tavaraluettelo) {
+        const item = document.createElement("li");
         item.textContent = data.tavaraluettelo[i];
-        tavaraluettelo.appendChild(item)
+        tavaraluettelo.appendChild(item);
     }
     return
 }
 
 function esineet_ja_mekanismit(data) {
     const esineet_ja_mekanismit = document.getElementById("esineet_ja_mekanismit");
+    esineet_ja_mekanismit.replaceChildren();
 
-    for (let i = 0; i < data.esineet_ja_mekanismit.length; i++) {
-        let item = document.createElement("li");
+    for (let i in data.esineet_ja_mekanismit) {
+        const item = document.createElement("li");
         item.textContent = data.esineet_ja_mekanismit[i];
-        esineet_ja_mekanismit.appendChild(item)
+        esineet_ja_mekanismit.appendChild(item);
     }
     return
 }

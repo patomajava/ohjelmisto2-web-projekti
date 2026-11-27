@@ -40,17 +40,9 @@ def tulokset():
 
 @app.route("/pelin_tilanne")
 def pelin_tilanne():
+    valinta = request.args.get("valinta", type=int)
+    return jsonify(getGameState(valinta))
 
-    valinta = request.args.get("valinta")
-    tiedot = getGameState(valinta)
-    return jsonify(tiedot)
-    
-    # tarinateksti = "Herra Hakkarainen on väsynyt"
-    # tieto2 = "Tieto 2"
-    # return jsonify({
-    #     "tarinateksti": tarinateksti,
-    #     "tieto2": tieto2
-    #     })
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=3000, use_reloader=True)

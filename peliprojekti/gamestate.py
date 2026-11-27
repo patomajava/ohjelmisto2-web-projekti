@@ -22,13 +22,23 @@ def getGameState(valinta):
         pass
 
     tiedot = {
-        "testitieto": "Hellureisson",
-        "testitieto2": {
-            "testitieto3": "Töttöröö"
+        "nykyinen_huone": "Huone1",
+        "tarinateksti": "Tarinateksti 1",
+        "kontrollit": {
+            "kontrolli1": "Liiku",
+            "kontrolli2": "Katso ympärillesi"
+        },
+        "tavaraluettelo": {
+            "tieto1": "Tavara 1",
+            "tieto2": "Tavara 2"
+        },
+        "esineet_ja_mekanismit": {
+            "tieto1": "Esine 1",
+            "tieto2": "Mekanismi 1"
         }
-        # "telaajan_nimi": nimi,
+        # "pelaajan_nimi": nimi,
         # "pelaajan_ika": ika,
-        # "tamanhetken_huone": huone,
+        # "nykyinen_huone": huone,
         # "siirryttavat_huoneet": siirryttavat_huoneet
         # "esineet_ja_mekanismit": esineet_ja_mekanismit
         # "tavaraluettelo": tavaraluettelo
