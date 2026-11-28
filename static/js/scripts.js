@@ -1,7 +1,6 @@
 "use strict";
 
-// Sivujen navigointi nappuloilla "uusi-peli"/"lataa-peli"/"poistu-pelistä" yms.
-
+// HTML sivujen navigointi painikkeilla
 const nappi_uusi = document.getElementById("uusi-peli");
 const nappi_lataa = document.getElementById("lataa-peli");
 const nappi_poistu = document.getElementById("poistu");
@@ -17,6 +16,7 @@ valintanapit?.forEach(nappi => {
     });
 });
 
+// Flask serveriltä pelitilanteen fetchaus
 async function paivitaPeli(valinta) {
 
     try {
@@ -29,33 +29,31 @@ async function paivitaPeli(valinta) {
 
         nykyinen_huone(data);
         tarinatekstit(data);
+        kontrollit(data);
         tavaraluettelo(data);
         esineet_ja_mekanismit(data);
 
-        return data;
+        return //data;
     }
     catch (error) {
         console.log("Virhe datan haussa:", error)
     };
 }
 
+// Seuraavat funktiot päivittävät eri kohtia pelialueesta
 function nykyinen_huone(data) {
     const tekstilaatikko = document.getElementById("nykyinen_huone");
-    tekstilaatikko.innerHTML = "";
-
     tekstilaatikko.textContent = data.nykyinen_huone;
     return
 }
 
 function tarinatekstit(data) {
     const tekstilaatikko = document.getElementById("tarinateksti");
-    tekstilaatikko.innerHTML = "";
-
     tekstilaatikko.textContent = data.tarinateksti;
     return
 }
 
-function kontrollit(data) { //ei toimi?
+function kontrollit(data) {
     const kontrollit = document.getElementById("kontrollit");
     kontrollit.replaceChildren();
     
